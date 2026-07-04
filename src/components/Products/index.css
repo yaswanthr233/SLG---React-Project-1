@@ -1,0 +1,164 @@
+.products-container{
+    width: 100%;
+    background-color: #FBFBFD;
+    padding: 20px;
+    padding-left: 30px;
+    gap: 20px;
+    display: flex;
+}
+
+.products-title{
+    font-size: 30px;
+    color: #000000;
+    font-weight: 2000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.total-products-container{
+    height: 120px;
+    width: 220px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #E8ECF2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.total-products-text{
+    font-size: 14px;
+    color: #808080;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.total-products-count{
+    font-size: 24px;
+    color: #108A43;
+    font-weight: 1200;
+    margin-left: 10px;
+}
+
+.total-products-text-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.products-list-container{
+    margin-top: 20px;
+    height: 58vh;
+    width: 55vw;
+    border: 1px solid #E8ECF2;
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.products-list-container::-webkit-scrollbar {
+    width: 10px;
+    background-color:transparent;
+    color:#000000;
+}
+
+.products-list-ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.products-list-li {
+    width: 220px;
+    background-color: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 16px;
+
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 16px;
+}
+
+.product-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.product-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.product-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.product-brand,
+.product-price,
+.product-selling-price,
+.product-stock,
+.product-unit,
+.product-gst {
+    margin: 0;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.product-in-stock {
+    background-color: #DCFCE7;
+    color: #15803D;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product-out-of-stock {
+    background-color: #FEE2E2;
+    color: #DC2626;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product-price{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 1000;
+    margin-top:10px;
+}
+
+.product-price-delete-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.product-delete-btn{
+    background-color: #DC2626;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}

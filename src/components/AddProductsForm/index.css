@@ -1,0 +1,87 @@
+.add-product-container{
+    display: flex;
+    justify-content: flex-end;
+    background-color: #ffffff;
+    height: 90vh;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid #E8ECF2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.add-product-label{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.add-product-input{
+    width: 85%;
+    padding: 10px;
+    border: 1px solid #E8ECF2;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.brand-name-label{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.brand-name-select{
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #E8ECF2;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    color: #000000;
+}
+
+.product-price-stock-container,.unit-selling-container,.cost-gst-container{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+        
+}
+
+.product-price-label,.cost-price-label,.selling-price-label,.cost-label,.unit-selling-label,.product-stock-label,.gst-label{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.product-price-input,.cost-price-input,.selling-price-input,.cost-input,.unit-selling-input,.product-stock-input,.gst-input{
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #E8ECF2;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    color: #000000;
+}
+
+.add-product-button{
+    width: 100%;
+    padding: 10px;
+    background-color: #108A43;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+}

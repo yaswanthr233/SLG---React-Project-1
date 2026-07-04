@@ -1,0 +1,12 @@
+.billing-container{
+    padding: 20px;
+    background-color: #F9FAFB;
+    height: 100vh;
+    width: 100%;
+}
+
+.billing-title{
+    color: #000000;
+    font-size: 30px;
+    font-weight: 600;
+}
