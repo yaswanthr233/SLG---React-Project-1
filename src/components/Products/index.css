@@ -15,27 +15,27 @@
 }
 
 .total-products-container{
-    height: 120px;
-    width: 220px;
+    height: 150px;
+    width: 300px;
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #E8ECF2;
     display: flex;
     align-items: center;
-    justify-content: center;
-    
-
+    justify-content: space-between;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
 .total-products-text{
-    font-size: 14px;
+    font-size: 20px;
     color: #808080;
     font-weight: 700;
     margin-left: 10px;
 }
 
 .total-products-count{
-    font-size: 24px;
+    font-size: 30px;
     color: #108A43;
     font-weight: 1200;
     margin-left: 10px;
@@ -50,7 +50,7 @@
 .products-list-container{
     margin-top: 20px;
     height: 58vh;
-    width: 55vw;
+    width: 60vw;
     border: 1px solid #E8ECF2;
     background-color: #ffffff;
     border-radius: 15px;

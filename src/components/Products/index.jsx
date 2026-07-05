@@ -3,21 +3,19 @@ import { BsFillHandbagFill } from "react-icons/bs";
 import AddProductsForm from '../AddProductsForm/index.jsx';
 import { useState } from 'react';
 import React from 'react';
-import { useContext } from 'react';
-import ProductsContext from '../ProductsContext/index.jsx';
+import ProductsContext from '../context/ProductsContext/index.jsx';
 
 const Products = () => {
-    const {products, deleteProduct} = React.useContext(ProductsContext)
-    const [totalProducts,setTotalProducts] = useState(products.length);
+    const {products, deleteProduct,productsCount} = React.useContext(ProductsContext)
     return(
         <div className="products-container">
             <div>
             <h1 className="products-title">Products</h1>
                <div className="total-products-container">
-                <BsFillHandbagFill size={30} color="#1B8343" />
+                <BsFillHandbagFill size={45} color="#1B8343" />
                 <div className="total-products-text-container">
                     <span className="total-products-text">Total Products</span>
-                    <span className="total-products-count">{totalProducts}</span>
+                    <span className="total-products-count">{productsCount}</span>
                 </div>
               </div>
               <div className="products-list-container">

@@ -2,7 +2,7 @@ import './index.css'
 import { useState } from 'react';
 import React from 'react';
 import { useContext } from 'react';
-import ProductsContext from '../ProductsContext/index.jsx';
+import ProductsContext from '../context/ProductsContext/index.jsx';
 import {v4 as uuid} from 'uuid';
 const AddProductsForm = () => {
     const {addProduct} = useContext(ProductsContext);
@@ -23,7 +23,8 @@ const AddProductsForm = () => {
             price: parseFloat(cost),
             stock: parseInt(stock),
             unit: unit,
-            gst: parseFloat(gst)
+            gst: parseFloat(gst),
+            imgUrl: event.target.elements['image-url'].value
         };
 
         addProduct(newProduct);
@@ -33,7 +34,7 @@ const AddProductsForm = () => {
                 <h1 className="products-title">Add Product</h1>
                 <form onSubmit={onAddProduct}>
                     <label className="add-product-label" htmlFor="product-name">Product Name</label>
-                    <input className="add-product-input" type="text" id="product-name" name="product-name" placeholder="Enter product name" />
+                    <input className="add-product-input" type="text" id="product-name" name="product-name" placeholder="Enter product name" /> <br/>
                     <label className="brand-name-label" htmlFor="brand-name">Brand Name</label>
                     <select className="brand-name-select" id="brand-name" name="brand-name">
                         <option value="tata">Select a brand</option>
@@ -74,6 +75,8 @@ const AddProductsForm = () => {
                             <input className="gst-input" type="number" id="gst" name="gst" placeholder="Enter GST" />
                         </div>
                     </div>
+                    <label className="image-url-label" htmlFor="image-url">Image URL</label>
+                    <input className="image-url-input" type="text" id="image-url" name="image-url" placeholder="Enter image URL" />
                     <button className="add-product-button" type="submit">Add Product</button>
                 </form>
             </div>

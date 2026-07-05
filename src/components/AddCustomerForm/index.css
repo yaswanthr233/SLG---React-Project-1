@@ -1,0 +1,71 @@
+.add-customer-form-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    box-sizing:  border-box;
+    background-color: #ffffff;
+    border: 1px solid #E8ECF2;
+    border-radius: 15px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.add-customer-form-container::-webkit-scrollbar{
+    width: 10px;
+    background-color:transparent;
+    color:#000000;
+}
+
+.add-customer-title{
+    font-size: 30px;
+    color: #000000;
+    font-weight: 2000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.add-customer-label{
+    font-size: 24px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.add-customer-input{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #E8ECF2;
+    width: 95%;
+    margin-top: 10px;
+}
+
+.add-customer-textarea{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #E8ECF2;
+    width: 95%;
+    margin-top: 10px;
+}
+
+.add-customer-button{
+    width: 100%;
+    height: 50px;
+    background-color: #108A43;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}

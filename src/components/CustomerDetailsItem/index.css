@@ -1,0 +1,62 @@
+.customer-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #E8ECF2;
+    height: 60px;
+    width: 98%;
+}
+
+.customer-item-name,.customer-item-email,.customer-item-phone,.customer-item-total-purchases,.customer-item-balance,.customer-item-status,.customer-item-actions{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+}
+
+
+
+.customer-item-name{
+    width: 80px;
+    text-overflow: ellipsis;
+}
+
+.customer-item-phone{
+    width: 150px;
+    text-overflow: ellipsis;
+}
+
+.customer-item-email{
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.customer-item-total-purchases{
+    width: 120px;
+    text-overflow: ellipsis;
+}
+
+.customer-item-balance{
+    width: 100px;
+    text-overflow: ellipsis;
+}
+
+.customer-item-status{
+    width: 100px;
+    text-overflow: ellipsis;
+}
+
+ 
+    
+.btn-edit,.btn-delete{
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    width: 30px;
+}
+
+.customer-item-actions{
+    gap: 10px;
+    display: flex;
+}

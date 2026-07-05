@@ -5,9 +5,13 @@ import Sidebar from './components/Sidebar/index.jsx'
 import Dashboard from './components/Dashboard/index.jsx'
 import Products from './components/Products/index.jsx'
 import Billing from './components/Billing/index.jsx'
+import Customers from './components/Customers/index.jsx'
+
 import { Routes, Route } from 'react-router'
 import { useState,useEffect } from 'react'
-import ProductsContext from './components/ProductsContext/index.jsx'
+
+import ProductsContext from './components/context/ProductsContext/index.jsx'
+import CustomersContext from './components/context/CustomersContext/index.jsx'
 import "@fontsource/poppins";
 
 
@@ -114,31 +118,167 @@ const initialProducts = [
   },
 ];
 
+const initialCustomers = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@gmail.com",
+    phone: "+91 6304999999",
+    totalPurchases: 1000,
+    balance: 500,
+    status: "Active",
+    customerNotes: "Regular customer, prefers cash payments.",
+  },
+  {
+    id: 2,
+    name: "Ravi Kumar",
+    email: "ravikumar@gmail.com",
+    phone: "+91 9876543210",
+    totalPurchases: 24500,
+    balance: 3500,
+    status: "Active",
+    customerNotes: "Customer has been with us for over a year.",
+  },
+  {
+    id: 3,
+    name: "Suresh Reddy",
+    email: "suresh.reddy@gmail.com",
+    phone: "+91 9123456789",
+    totalPurchases: 18200,
+    balance: 0,
+    status: "Paid",
+    customerNotes: "First-time customer, interested in credit options.",
+  },
+  {
+    id: 4,
+    name: "Anil Kumar",
+    email: "anilkumar@gmail.com",
+    phone: "+91 9012345678",
+    totalPurchases: 32800,
+    balance: 6800,
+    status: "Pending",
+    customerNotes: "Customer is interested in installment plans.",
+  },
+  {
+    id: 5,
+    name: "Mahesh Babu",
+    email: "maheshbabu@gmail.com",
+    phone: "+91 9988776655",
+    totalPurchases: 8450,
+    balance: 1200,
+    status: "Active",
+    customerNotes: "Customer has been with us for over a year.",
+  },
+  {
+    id: 6,
+    name: "Prakash Naidu",
+    email: "prakash.naidu@gmail.com",
+    phone: "+91 9393939393",
+    totalPurchases: 15600,
+    balance: 0,
+    status: "Paid",
+    customerNotes: "Customer has made a large purchase.",
+  },
+  {
+    id: 7,
+    name: "Venkatesh Rao",
+    email: "venkateshrao@gmail.com",
+    phone: "+91 9555566666",
+    totalPurchases: 41200,
+    balance: 9200,
+    status: "Pending",
+    customerNotes: "Customer is interested in installment plans.",
+  },
+  {
+    id: 8,
+    name: "Lakshmi Narayana",
+    email: "lakshmi.narayana@gmail.com",
+    phone: "+91 9444455555",
+    totalPurchases: 22450,
+    balance: 2500,
+    status: "Active",
+    customerNotes: "Regular customer, prefers cash payments.",
+  },
+  {
+    id: 9,
+    name: "Sai Krishna",
+    email: "saikrishna@gmail.com",
+    phone: "+91 9888811111",
+    totalPurchases: 13500,
+    balance: 0,
+    status: "Paid",
+    customerNotes: "First-time customer, interested in credit options.",
+  },
+  {
+    id: 10,
+    name: "Ramesh Gupta",
+    email: "rameshgupta@gmail.com",
+    phone: "+91 9777722222",
+    totalPurchases: 27800,
+    balance: 4800,
+    status: "Pending",
+    customerNotes: "Customer has been with us for over a year.",
+  },
+];
 
 function App() {
   const storedProducts = localStorage.getItem("products");
   const [products, setProducts] = useState(storedProducts
     ? JSON.parse(storedProducts)
     : initialProducts);
+  const [productsCount, setProductsCount] = useState(0);
+  useEffect(() => {
+    setProductsCount(products.length);
+  }, [products]);
   const addProduct = (product) => {
     setProducts([...products, product]);
   }
   const deleteProduct = (productId) => {
     setProducts(products.filter((product) => product.id !== productId));
   } 
+  
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   },[products])
+
+
+  const storedCustomers = localStorage.getItem("customers");
+  const [customers, setCustomers] = useState(storedCustomers
+    ? JSON.parse(storedCustomers)
+    : initialCustomers);
+  const [customersCount, setCustomersCount] = useState(0);
+  useEffect(() => {
+    setCustomersCount(customers.length);
+  }, [customers]);
+  const addCustomer = (customer) => {
+    setCustomers([...customers, customer]);
+  }
+  const deleteCustomer = (customerId) => {
+    setCustomers(customers.filter((customer) => customer.id !== customerId));
+  } 
+  const updateCustomer = (updatedCustomer) => {
+    setCustomers(customers.map((customer) => customer.id === updatedCustomer.id ? updatedCustomer : customer));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("customers", JSON.stringify(customers));
+  },[customers])
+
+
+  
   return (
     <div className="app-container">
       <Sidebar/>
-      <ProductsContext.Provider value={{ products, addProduct, deleteProduct }}>
+      <CustomersContext.Provider value={{ customers, customersCount, addCustomer, updateCustomer, deleteCustomer }}>
+      <ProductsContext.Provider value={{ products, addProduct, deleteProduct, productsCount }}>
       <Routes>
            <Route path="/" element={<Dashboard />} />
            <Route path="/products" element={<Products />} />
            <Route path="/billing" element={<Billing />} />
+           <Route path="/customers" element={<Customers />} />
       </Routes>
       </ProductsContext.Provider>
+      </CustomersContext.Provider>
     </div>
   )
 }

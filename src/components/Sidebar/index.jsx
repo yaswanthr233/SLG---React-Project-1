@@ -3,6 +3,8 @@ import { GoHome } from "react-icons/go";
 import { AiOutlineProduct } from "react-icons/ai";
 import { Link } from 'react-router'
 import { TbFileInvoice } from "react-icons/tb";
+import { HiOutlineUsers } from "react-icons/hi2";
+
 
 
 const Sidebar = () => {
@@ -14,10 +16,12 @@ const Sidebar = () => {
             </div>
             <p className="sidebar-subtitle">Sri Lakshmi Ganapathi Enterprises</p>
             <div className="sidebar-links-container">
+                <Link to="/" className="sidebar-link-item-btn">
                 <button className="sidebar-item-btn">
                     <GoHome size={30} color="#1B8343" />
                     <span className="sidebar-link-text">Dashboard</span>
                 </button>
+                </Link>
                 <Link to="/products" className="sidebar-link-item-btn">
                 <button className="sidebar-item-btn">
                         <AiOutlineProduct size={30} color="#1B8343" />
@@ -28,6 +32,12 @@ const Sidebar = () => {
                 <button className="sidebar-item-btn">
                         <TbFileInvoice size={30} color="#1B8343" />
                         <span className="sidebar-link-text">Billing</span>
+                    </button>
+                </Link>
+                <Link to="/customers" className="sidebar-link-item-btn">
+                <button className="sidebar-item-btn">
+                        <HiOutlineUsers size={30} color="#1B8343" />
+                        <span className="sidebar-link-text">Customers</span>
                     </button>
                 </Link>
             </div>
