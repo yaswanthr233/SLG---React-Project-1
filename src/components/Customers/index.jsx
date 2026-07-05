@@ -31,10 +31,8 @@ const Customers = () => {
                             <FiSearch size={22} color="#000000" />
                             </div>
                         </div>
-                        <div className="customer-header-details-container"></div>
                         <div className="customer-item-header-attributes-container">
                                 <span className="customer-header-attribute">Name</span>
-                                <span className="customer-header-attribute email">Email</span>
                                 <span className="customer-header-attribute">Phone</span>
                                 <span className="customer-header-attribute">Total Purchases</span>
                                 <span className="customer-header-attribute balance">Balance</span>

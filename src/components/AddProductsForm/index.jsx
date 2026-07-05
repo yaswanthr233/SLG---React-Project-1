@@ -6,16 +6,16 @@ import ProductsContext from '../context/ProductsContext/index.jsx';
 import {v4 as uuid} from 'uuid';
 const AddProductsForm = () => {
     const {addProduct} = useContext(ProductsContext);
-    
+    const [productName, setProductName] = useState('');
+    const [brandName, setBrandName] = useState('');
+    const [unit, setUnit] = useState('');
+    const [stock, setStock] = useState('');
+    const [cost, setCost] = useState('');
+    const [gst, setGst] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
+
     const onAddProduct = (event) => {
         event.preventDefault();
-        const productName = event.target.elements['product-name'].value;
-        const brandName = event.target.elements['brand-name'].value;
-        const unit = event.target.elements['unit'].value;
-        const stock = event.target.elements['product-stock'].value;
-        const cost = event.target.elements['cost'].value;
-        const gst = event.target.elements['gst'].value;
-
         const newProduct = {
             id: uuid(),
             name: productName,
@@ -24,19 +24,26 @@ const AddProductsForm = () => {
             stock: parseInt(stock),
             unit: unit,
             gst: parseFloat(gst),
-            imgUrl: event.target.elements['image-url'].value
+            imgUrl: imageUrl,
         };
 
         addProduct(newProduct);
+        setProductName('');
+        setBrandName('');
+        setUnit('');
+        setStock('');
+        setCost('');
+        setGst('');
+        setImageUrl('');
     }
   return (
     <div className="add-product-container">
                 <h1 className="products-title">Add Product</h1>
                 <form onSubmit={onAddProduct}>
                     <label className="add-product-label" htmlFor="product-name">Product Name</label>
-                    <input className="add-product-input" type="text" id="product-name" name="product-name" placeholder="Enter product name" /> <br/>
+                    <input className="add-product-input" type="text" id="product-name" name="product-name" placeholder="Enter product name" value={productName} onChange={(e) => setProductName(e.target.value)}/> <br/>
                     <label className="brand-name-label" htmlFor="brand-name">Brand Name</label>
-                    <select className="brand-name-select" id="brand-name" name="brand-name">
+                    <select className="brand-name-select" id="brand-name" name="brand-name" value={brandName} onChange={(e) => setBrandName(e.target.value)}>
                         <option value="tata">Select a brand</option>
                         <option value="synergy">Synergy agro chemicals</option>
                         <option value="parijat">Parijat industries pvt Ltd</option>
@@ -58,25 +65,25 @@ const AddProductsForm = () => {
                     <div className="product-price-stock-container">
                         <div>
                             <label className="unit-selling-label" htmlFor="unit">Unit</label>
-                            <input className="unit-selling-input" type="number" id="unit" name="unit" placeholder="Enter unit" />
+                            <input className="unit-selling-input" type="number" id="unit" name="unit" placeholder="Enter unit" value={unit} onChange={(e) => setUnit(e.target.value)}/>
                         </div>
                         <div>
                             <label className="product-stock-label" htmlFor="product-stock">Stock</label>
-                            <input className="product-stock-input" type="number" id="product-stock" name="product-stock" placeholder="Enter stock" />
+                            <input className="product-stock-input" type="number" id="product-stock" name="product-stock" placeholder="Enter stock" value={stock} onChange={(e) => setStock(e.target.value)}/>
                         </div>
                     </div>
                     <div className="cost-gst-container">
                         <div>
                             <label className="cost-label" htmlFor="cost">Cost (₹)</label>
-                            <input className="cost-input" type="number" id="cost" name="cost" placeholder="Enter cost" />
+                            <input className="cost-input" type="number" id="cost" name="cost" placeholder="Enter cost" value={cost} onChange={(e) => setCost(e.target.value)}/>
                         </div>
                         <div>
                             <label className="gst-label" htmlFor="gst">GST (%)</label>
-                            <input className="gst-input" type="number" id="gst" name="gst" placeholder="Enter GST" />
+                            <input className="gst-input" type="number" id="gst" name="gst" placeholder="Enter GST" value={gst} onChange={(e) => setGst(e.target.value)}/>
                         </div>
                     </div>
                     <label className="image-url-label" htmlFor="image-url">Image URL</label>
-                    <input className="image-url-input" type="text" id="image-url" name="image-url" placeholder="Enter image URL" />
+                    <input className="image-url-input" type="text" id="image-url" name="image-url" placeholder="Enter image URL" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
                     <button className="add-product-button" type="submit">Add Product</button>
                 </form>
             </div>

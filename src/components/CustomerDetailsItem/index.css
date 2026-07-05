@@ -17,23 +17,17 @@
 
 
 .customer-item-name{
-    width: 80px;
+    width: 50px;
     text-overflow: ellipsis;
 }
 
 .customer-item-phone{
-    width: 150px;
+    width: 180px;
     text-overflow: ellipsis;
-}
-
-.customer-item-email{
-    width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .customer-item-total-purchases{
-    width: 120px;
+    width: 160px;
     text-overflow: ellipsis;
 }
 
@@ -59,4 +53,5 @@
 .customer-item-actions{
     gap: 10px;
     display: flex;
+    width: 80px;
 }
