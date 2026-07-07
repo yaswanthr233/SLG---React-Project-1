@@ -3,20 +3,26 @@ import { FiEdit } from "react-icons/fi";
 import { FiTrash } from "react-icons/fi";
 
 const CustomerDetailsItem = ({ customer, onDeleteCustomer }) => {
+    // Determine dynamic status based on balance
+    const statusText = customer.balance > 0 ? "Pending" : "Paid";
+    const statusClass = customer.balance > 0 ? "status-pending" : "status-paid";
+
     return (
-        <li className="customer-item">
-            <span className="customer-item-name">{customer.name}</span>
-            <span className="customer-item-phone">{customer.phone}</span>
-            <span className="customer-item-total-purchases">${customer.totalPurchases}</span>
-            <span className="customer-item-balance">${customer.balance}</span>
-            <span className="customer-item-status">{customer.status}</span>
-            <span className="customer-item-actions">
-                <button className="btn-edit"><FiEdit size={20} color="#108A43" /></button>
-                <button className="btn-delete" onClick={() => onDeleteCustomer(customer.id)}>
-                    <FiTrash size={20} color="#FF0000" />
+        <tr className="customer-row">
+            <td className="customer-item-name">{customer.name}</td>
+            <td className="customer-item-phone">{customer.phone}</td>
+            <td className="customer-item-total-purchases">₹{customer.totalPurchases}</td>
+            <td className="customer-item-balance">₹{customer.balance}</td>
+            <td className="customer-item-status">
+                <span className={`status-badge ${statusClass}`}>{statusText}</span>
+            </td>
+            <td className="customer-item-actions">
+                <button className="btn-edit" title="Edit"><FiEdit size={18} color="#108A43" /></button>
+                <button className="btn-delete" title="Delete" onClick={() => onDeleteCustomer(customer.id)}>
+                    <FiTrash size={18} color="#FF0000" />
                 </button>
-            </span>
-        </li>
+            </td>
+        </tr>
     )
 }
-export default CustomerDetailsItem
+export default CustomerDetailsItem;

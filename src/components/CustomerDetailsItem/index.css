@@ -1,57 +1,61 @@
-.customer-item{
+.customer-row {
+    border-bottom: 1px solid #E8ECF2;
+    transition: background-color 0.2s;
+}
+
+.customer-row:hover {
+    background-color: #f9fbf9;
+}
+
+.customer-row td {
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #333333;
+    vertical-align: middle;
+}
+
+/* Status Indicators */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-paid {
+    background-color: #e6f6ec;
+    color: #108A43;
+}
+
+.status-pending {
+    background-color: #ffebe6;
+    color: #ff3b30;
+}
+
+/* Action Utility Triggers */
+.customer-item-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-edit, .btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #E8ECF2;
-    height: 60px;
-    width: 98%;
+    justify-content: center;
+    transition: background-color 0.2s;
 }
 
-.customer-item-name,.customer-item-email,.customer-item-phone,.customer-item-total-purchases,.customer-item-balance,.customer-item-status,.customer-item-actions{
-    font-size: 18px;
-    color: #000000;
-    font-weight: 400;
+.btn-edit:hover {
+    background-color: #e6f6ec;
 }
 
-
-
-.customer-item-name{
-    width: 50px;
-    text-overflow: ellipsis;
-}
-
-.customer-item-phone{
-    width: 180px;
-    text-overflow: ellipsis;
-}
-
-.customer-item-total-purchases{
-    width: 160px;
-    text-overflow: ellipsis;
-}
-
-.customer-item-balance{
-    width: 100px;
-    text-overflow: ellipsis;
-}
-
-.customer-item-status{
-    width: 100px;
-    text-overflow: ellipsis;
-}
-
- 
-    
-.btn-edit,.btn-delete{
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    width: 30px;
-}
-
-.customer-item-actions{
-    gap: 10px;
-    display: flex;
-    width: 80px;
+.btn-delete:hover {
+    background-color: #ffebe6;
 }

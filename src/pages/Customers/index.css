@@ -6,15 +6,15 @@
     gap: 20px;
 }
 .customers-title{
-    font-size: 35px;
+    font-size: 30px;
     color: #000000;
     font-weight: 2000;
     font-family: 'Poppins', sans-serif;
 }
 
 .total-customers-container{
-    height: 150px;
-    width: 300px;
+    height: 100px;
+    width: 200px;
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #E8ECF2;
@@ -32,41 +32,37 @@
 
 
 .total-customers{
-    font-size: 30px;
+    font-size: 20px;
     color: #108A43;
     font-weight: 1200;
     margin-left: 10px;
 }
 
 .total-customers-text{
-    font-size: 20px;
+    font-size: 10px;
     color: #808080;
     font-weight: 700;
     margin-left: 10px;   
 }
 
 .total-customers-count{
-    font-size: 30px;
+    font-size: 15px;
     color: #108A43;
     font-weight: 1200;
     margin-left: 10px;
-    margin-top: -20px;
+    margin-top: -15px;
 }
 
 .customers-list-container{
     margin-top: 20px;
     height: 58vh;
-    width: 65vw;
+    width: 60vw;
     border: 1px solid #E8ECF2;
     background-color: #ffffff;
     border-radius: 15px;
     overflow-y: auto;
 }
 
-.customers-list-ul{
-    list-style-type: none;
-    width: 98%;
-}
 
 .customer-item{
     display: flex;
@@ -85,8 +81,7 @@
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #E8ECF2;
-    height: 60px;
-    width: 98%;
+    height: 30px;
     padding-left: 20px;
     padding-top: 30px;
 }
@@ -100,7 +95,8 @@
     border: 1px solid #caced4;
     border-radius: 15px;
     background-color: #ffffff;
-    margin-top:-20px;
+    height: 20px;
+
 }
 
 .customer-search-input{
@@ -109,39 +105,125 @@
     color: #000000;   
     background-color: transparent;
     border: none;
+    height: 40px;
     outline: none;
     font-size: 18px;
     flex: 1;
 }
 
-.customer-item-header-attributes-container{
+.customers-container {
+    padding: 20px 20px 20px 40px;
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.customers-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.customers-title {
+    font-size: 30px;
+    color: #000000;
+    font-weight: 700;
+    margin: 0;
+}
+
+.total-customers-container {
+    height: 90px;
+    width: 220px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #E8ECF2;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.total-customers-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-customers-text {
+    font-size: 12px;
+    color: #808080;
+    font-weight: 600;
+    margin: 0;   
+}
+
+.total-customers-count {
+    font-size: 22px;
+    color: #108A43;
+    font-weight: 700;
+    margin: 0;
+}
+
+.customers-list-container {
+    border: 1px solid #E8ECF2;
+    background-color: #ffffff;
+    border-radius: 15px;
+    max-height: 58vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-item-search-container {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #E8ECF2;
+}
+
+.customer-search-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 98%;
-    padding: 10px;
-    border-bottom: 1px solid #E8ECF2;
-    height: 60px;
-    background-color: #f5f5f5;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 16px;
+    border: 1px solid #caced4;
+    border-radius: 20px;
+    background-color: #ffffff;
 }
 
-.customer-header-attribute{
-    font-size: 18px;
+.customer-search-input {
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
     color: #000000;
-    font-weight: 700;
 }
 
-
-
-.customers-items-ul{
-    list-style-type: none;
-    padding: 0;
-    overflow-y: auto;
-    width: 100%;
+table{
+    margin-top: 0px;
 }
 
-.customer-header-details-container{
+.customers-table {
     width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.customer-item-header {
+    background-color: #ece9e9;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.customer-item-header-attribute {
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #444444;
+    font-weight: 600;
 }

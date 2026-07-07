@@ -45,7 +45,7 @@ const AddCustomerForm = () => {
                 <label className="add-customer-label" htmlFor="customer-name">Customer Name</label> <br/>
                 <input type="text" id="customer-name" placeholder="Customer Name" className="add-customer-input" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/><br/>
                 <label className="add-customer-label" htmlFor="customer-phone">Phone Number</label><br/>
-                <input type="tel" id="customer-phone" placeholder="Customer Phone Number" className="add-customer-input" value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)}/><br/>
+                <input type="tel" maxLength="10" id="customer-phone" placeholder="Customer Phone Number" className="add-customer-input" value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)}/><br/>
                 <label className="add-customer-label" htmlFor="customer-email">Email</label><br/>
                 <input type="email" id="customer-email" placeholder="Customer Email" className="add-customer-input" value={customerEmail} onChange={(e) => setCustomerEmail(e.target.value)}/> <br/>
                 <label className="add-customer-label" htmlFor="customer-address">Address</label><br/>
