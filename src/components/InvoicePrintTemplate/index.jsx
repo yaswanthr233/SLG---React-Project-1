@@ -5,7 +5,7 @@ import { MdCall } from "react-icons/md";
 import { BsCashStack, BsCreditCard } from "react-icons/bs";
 import { MdPhoneIphone } from "react-icons/md";
 
-const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer }) => {
+const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer, items = [] }) => {
     
     const formatPrintDate = (dateString) => {
         if (!dateString) return 'N/A';
@@ -13,9 +13,15 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
         return isNaN(parsedDate.getTime()) ? 'N/A' : parsedDate.toLocaleDateString();
     };
 
+    // 1. Compute totals dynamically from items to perfectly sync with your summary section calculations
+    const subTotal = items.reduce((total, item) => total + (item.rowAmount || 0), 0);
+    const safeDiscount = activeCustomer?.discount || 0; // Replace with dynamic discount passing if tracked inside billing form state
+    const netTotalAmount = Math.max(0, subTotal - safeDiscount);
+    const paidAmount = paymentType === 'credit' ? 0 : netTotalAmount;
+    const balanceAmount = paymentType === 'credit' ? netTotalAmount : 0;
+
     return (
         <div className="invoice-print-template-container">
-            {/* --- DO NOT MODIFY HEADER (START) --- */}
             <div className="invoice-print-template-header">
                 <div className="logo-container-billing">
                     <img className="sidebar-logo-print" src="https://res.cloudinary.com/duokznlha/image/upload/v1783096947/ChatGPT_Image_Jul_3_2026_10_02_51_PM_uyfe9v.png" alt="Logo"/>
@@ -42,7 +48,7 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Invoice No</span>
                             <span className="invoice-number-colon-print">:</span>
-                            <span className="invoice-number-value-print">{invoiceNumber || 'INV-2024-000123'}</span>
+                            <span className="invoice-number-value-print">{invoiceNumber || 'N/A'}</span>
                         </div>
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Date</span>
@@ -57,31 +63,29 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Payment Type</span>
                             <span className="invoice-number-colon-print">:</span>
-                            <span className="invoice-number-value-print" style={{ textTransform: 'capitalize' }}>{paymentType || 'Credit'}</span>
+                            <span className="invoice-number-value-print" style={{ textTransform: 'capitalize' }}>{paymentType || 'N/A'}</span>
                         </div>
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Due Date</span>
                             <span className="invoice-number-colon-print">:</span>
-                            <span className="invoice-number-value-print">{formatPrintDate(dueDate || '2026-07-20')}</span>
+                            <span className="invoice-number-value-print">{formatPrintDate(dueDate)}</span>
                         </div>
                     </div>
                 </div>
             </div>    
-            {/* --- DO NOT MODIFY HEADER (END) --- */}
 
-            {/* BILL TO SECTION */}
             <div className="invoice-print-customer-details-section">
                 <h4 className="bill-to-title">BILL TO :</h4>
                 <div className="customer-details-print">
-                    <strong className="customer-name">{activeCustomer?.name || 'Ravi Varma'}</strong>
-                    <span>{activeCustomer?.address1 || 'Door No 12-3-45, Near Bus Stand,'}</span>
-                    <span>{activeCustomer?.address2 || 'Pedakakani, Guntur,'}</span>
-                    <span>{activeCustomer?.state || 'Andhra Pradesh - 522509'}</span>
-                    <span>Phone: {activeCustomer?.phone || '9876543210'}</span>
+                    <strong className="customer-name">{activeCustomer?.name || 'Walk-in Customer'}</strong>
+                    <span>{activeCustomer?.address1 || 'N/A'}</span>
+                    <span>{activeCustomer?.address2 || ''}</span>
+                    <span>{activeCustomer?.state || ''}</span>
+                    <span>Phone: {activeCustomer?.phone || 'N/A'}</span>
                 </div>
             </div>
 
-            {/* PRODUCT ITEMS TABLE */}
+            {/* DYNAMIC PRODUCT ITEMS TABLE */}
             <div className="invoice-items-table-container">
                 <table className="invoice-items-table">
                     <thead>
@@ -96,20 +100,28 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Urea 46%</td>
-                            <td>bag</td>
-                            <td>1</td>
-                            <td>266.00</td>
-                            <td>5%</td>
-                            <td className="text-right">279.30</td>
-                        </tr>
+                        {items.length === 0 ? (
+                            <tr>
+                                <td colSpan="7" style={{ textAlign: 'center', color: '#888' }}>No items added to invoice</td>
+                            </tr>
+                        ) : (
+                            items.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.unit}</td>
+                                    <td>{item.qty}</td>
+                                    <td>{Number(item.price).toFixed(2)}</td>
+                                    <td>{item.gst}%</td>
+                                    <td className="text-right">{Number(item.rowAmount).toFixed(2)}</td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
 
-            {/* SUMMARY SECTION */}
+            {/* DYNAMIC SUMMARY SECTION */}
             <div className="invoice-summary-section">
                 <div className="summary-empty-space"></div>
                 <div className="summary-calculations">
@@ -117,23 +129,23 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         <tbody>
                             <tr>
                                 <td>Sub Total (₹)</td>
-                                <td className="text-right">279.30</td>
+                                <td className="text-right">{subTotal.toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Discount (₹)</td>
-                                <td className="text-right">0.00</td>
+                                <td className="text-right">{safeDiscount.toFixed(2)}</td>
                             </tr>
                             <tr className="summary-highlight-row-green">
                                 <td>Total Amount (₹)</td>
-                                <td className="text-right">₹ 279.30</td>
+                                <td className="text-right">₹ {netTotalAmount.toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <td>Paid Amount (₹)</td>
-                                <td className="text-right">0.00</td>
+                                <td className="text-right">{paidAmount.toFixed(2)}</td>
                             </tr>
                             <tr className="summary-highlight-row-red">
                                 <td className="balance-text">Balance Amount (₹)</td>
-                                <td className="text-right balance-amount">₹ 279.30</td>
+                                <td className="text-right balance-amount">₹ {balanceAmount.toFixed(2)}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -146,7 +158,7 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                     <p className="footer-title">Payment Options :</p>
                     <ul className="payment-list">
                         <li><BsCashStack size={12}/> Cash</li>
-                        <li><MdPhoneIphone size={12}/> UPI</li>
+                        <li><MdPhoneIphone size={12}/> UPI / Online</li>
                         <li><BsCreditCard size={12}/> Credit</li>
                     </ul>
                 </div>
@@ -156,7 +168,7 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                     <ol className="notes-list">
                         <li>Goods once sold will not be taken back.</li>
                         <li>Please make the payment before the due date.</li>
-                        <li>Subject to Guntur Jurisdiction only.</li>
+                        <li>Subject to local Jurisdiction only.</li>
                     </ol>
                 </div>
 

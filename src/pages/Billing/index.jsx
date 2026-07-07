@@ -10,7 +10,7 @@ const Billing = () => {
     const { products } = useContext(ProductsContext);
     
     const [customerId, setCustomerId] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('cash');
     const [discount, setDiscount] = useState(0);
     const [items, setItems] = useState([]);
     const [invoiceNumber, setInvoiceNumber] = useState('');
@@ -31,10 +31,7 @@ const Billing = () => {
             id: items.length + 1, 
             productId: defaultProduct ? defaultProduct.id : '',
             unit: 'bag',
-            qty: 1,
-            price: defaultProduct ? defaultProduct.price : 0,
-            gst: defaultProduct ? defaultProduct.gst : 0,
-            amount: defaultProduct ? defaultProduct.price + (defaultProduct.price * defaultProduct.gst) / 100 : 0,
+            qty: 1
         };
         setItems([...items, newItem]);
     };
@@ -50,18 +47,39 @@ const Billing = () => {
         const afterDeleteItems = items.filter((item, i) => i !== index);
         setItems(afterDeleteItems);
     };
-    console.log(items)
-    const calculateTotalAmount = () => {
-        return items.reduce((total, item) => total + item.amount, 0);
-    }
-    const totalAmount = calculateTotalAmount();
+
+    const computedItemsList = items.map(item => {
+        const currentProduct = products.find(p => p.id === Number(item.productId));
+        const price = currentProduct ? currentProduct.price : 0;
+        const gst = currentProduct ? currentProduct.gst : 0;
+        const qty = Number(item.qty) || 0;
+        const rowAmount = (price + (price * gst) / 100) * qty;
+        
+        return {
+            ...item,
+            name: currentProduct?.name || 'Unknown',
+            price,
+            gst,
+            rowAmount
+        };
+    });
+
+    const totalAmount = computedItemsList.reduce((total, item) => total + item.rowAmount, 0);
+    const safeDiscount = Number(discount) || 0;
+    const netTotalAmount = Math.max(0, totalAmount - safeDiscount);
+    const paidAmount = paymentMethod === 'credit' ? 0 : netTotalAmount;
+    const balanceAmount = paymentMethod === 'credit' ? netTotalAmount : 0;
+
     const onClearInvoice = (e) => {
         e.preventDefault();
         setItems([]);
-        setCustomerId('');
-        setPaymentMethod('');
+        if (customers.length > 0) setCustomerId(customers[0].id);
+        setPaymentMethod('cash');
         setDiscount(0);
-    }
+        setInvoiceNumber('');
+        setDueDate('');
+    };
+
     const onPrintInvoice = (e) => {
         e.preventDefault();
         if(!customerId || !paymentMethod || items.length === 0){
@@ -69,7 +87,8 @@ const Billing = () => {
         } else {
             window.print();
         }
-    }
+    };
+
     return (
         <div className="billing-container">
             <h1 className="billing-title">Billing</h1>
@@ -117,7 +136,7 @@ const Billing = () => {
                             </div>
                             <div className="invoice-row-field">
                                 <span className="invoice-label">Date:</span>
-                                <input type="date" className="invoice-date-input" />
+                                <input type="date" className="invoice-date-input" defaultChecked />
                             </div>
                             <div className="invoice-row-field">
                                 <span className="invoice-label">Payment Method:</span>
@@ -129,7 +148,7 @@ const Billing = () => {
                             </div>
                             <div className="invoice-row-field">
                                 <span className="invoice-label">Due Date:</span>
-                                <input type="date" className="due-date-input" onChange={(e) => setDueDate(e.target.value)} />
+                                <input type="date" className="due-date-input" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -150,13 +169,7 @@ const Billing = () => {
                                 </tr>
                             </thead>    
                             <tbody className="product-items-invoice-details-tbody">
-                                {items.map((item, index) => {
-                                    const currentProduct = products.find(p => p.id === Number(item.productId));
-                                    const price = currentProduct ? currentProduct.price : 0;
-                                    const gst = currentProduct ? currentProduct.gst : 0;
-                                    const qty = Number(item.qty) || 0;
-                                    const rowAmount = (price + (price * gst) / 100) * qty;
-
+                                {computedItemsList.map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td className="product-items-invoice-details-data">{index + 1}</td>
@@ -196,10 +209,10 @@ const Billing = () => {
                                                 />
                                             </td>
                                             <td className="product-items-invoice-details-data">
-                                                <p className="product-items-invoice-details-amount">₹{price}</p>
+                                                <p className="product-items-invoice-details-amount">₹{item.price}</p>
                                             </td>
-                                            <td className="product-items-invoice-details-data">{gst}%</td>
-                                            <td className="product-items-invoice-details-data">₹{rowAmount.toFixed(2)}</td>
+                                            <td className="product-items-invoice-details-data">{item.gst}%</td>
+                                            <td className="product-items-invoice-details-data">₹{item.rowAmount.toFixed(2)}</td>
                                             <td className="product-items-invoice-details-data">
                                                 <button className="product-items-invoice-details-delete-button" onClick={(e) => deleteItem(e, index)}>
                                                     <MdDeleteOutline size={20} color="#ff0000" />
@@ -220,27 +233,33 @@ const Billing = () => {
                     <h1 className="billing-summary-title">Summary</h1>
                     <p className="billing-summary-text">Sub Total (₹): <span className='span-billing-summary-text'>{totalAmount.toFixed(2)}</span></p>
                     <div className="billing-summary-discount-container">
-                    <label className="billing-summary-label" htmlFor="discount">Discount (₹):</label>
-                    <input 
-                        type="number" 
-                        className="billing-summary-input" 
-                        id="discount"
-                        placeholder="Enter discount"
-                        value={discount}
-                        onChange={(e) => setDiscount(parseFloat(e.target.value))}
-                    />
+                        <label className="billing-summary-label" htmlFor="discount">Discount (₹):</label>
+                        <input 
+                            type="number" 
+                            className="billing-summary-input" 
+                            id="discount"
+                            placeholder="Enter discount"
+                            value={discount}
+                            onChange={(e) => setDiscount(e.target.value ? parseFloat(e.target.value) : 0)}
+                        />
                     </div>
-                    <p className="billing-summary-text">Total Amount (₹): <span className='span-billing-total-amount'>{(totalAmount - discount).toFixed(2)}</span></p>
-                    <p className="billing-summary-text">Paid Amount (₹): <span className='span-billing-paid-amount'>{paymentMethod === 'credit' ? '0.00' : (totalAmount - discount).toFixed(2)}</span></p>
-                    <p className="billing-summary-text">Balance Amount (₹): <span className='span-billing-balance-amount'>{paymentMethod === 'credit' ? (totalAmount - discount).toFixed(2) : '0.00'}</span></p>
+                    <p className="billing-summary-text">Total Amount (₹): <span className='span-billing-total-amount'>{netTotalAmount.toFixed(2)}</span></p>
+                    <p className="billing-summary-text">Paid Amount (₹): <span className='span-billing-paid-amount'>{paidAmount.toFixed(2)}</span></p>
+                    <p className="billing-summary-text">Balance Amount (₹): <span className='span-billing-balance-amount'>{balanceAmount.toFixed(2)}</span></p>
                     <div className="billing-btns-container">
-                    <button className="billing-summary-print-invoice-button" onClick={onPrintInvoice}>Print Invoice</button>
-                    <button className="billing-summary-clear-button" onClick={onClearInvoice}>Clear</button>
+                        <button className="billing-summary-print-invoice-button" onClick={onPrintInvoice}>Print Invoice</button>
+                        <button className="billing-summary-clear-button" onClick={onClearInvoice}>Clear</button>
                     </div>
                 </div>
             </form>
             <div className="invoice-print-template-container">
-            <InvoicePrintTemplate invoiceNumber={invoiceNumber} paymentType={paymentMethod} dueDate={dueDate} activeCustomer={activeCustomer} items={items} />
+                <InvoicePrintTemplate 
+                    invoiceNumber={invoiceNumber} 
+                    paymentType={paymentMethod} 
+                    dueDate={dueDate} 
+                    activeCustomer={activeCustomer} 
+                    items={computedItemsList} 
+                />
             </div>
         </div>
     );

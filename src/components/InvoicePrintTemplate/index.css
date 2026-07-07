@@ -171,7 +171,7 @@
 
 /* NEW STYLES: Table */
 .invoice-items-table-container {
-    width: 100%;
+    width: 60%;
     border: 1px solid #ccc;
     margin-bottom: 0px; 
 }
@@ -214,6 +214,7 @@
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-top: none;
+    margin-top: -100px;
 }
 
 .summary-empty-space {
