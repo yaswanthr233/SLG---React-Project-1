@@ -5,6 +5,7 @@
     padding-left: 30px;
     gap: 20px;
     display: flex;
+    height: 100%;
 }
 
 .products-title{
