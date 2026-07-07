@@ -259,6 +259,7 @@ const Billing = () => {
                     dueDate={dueDate} 
                     activeCustomer={activeCustomer} 
                     items={computedItemsList} 
+                    discount={safeDiscount}
                 />
             </div>
         </div>

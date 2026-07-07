@@ -5,7 +5,7 @@ import { MdCall } from "react-icons/md";
 import { BsCashStack, BsCreditCard } from "react-icons/bs";
 import { MdPhoneIphone } from "react-icons/md";
 
-const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer, items = [] }) => {
+const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer, items = [] , discount }) => {
     
     const formatPrintDate = (dateString) => {
         if (!dateString) return 'N/A';
@@ -15,7 +15,7 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
 
     // 1. Compute totals dynamically from items to perfectly sync with your summary section calculations
     const subTotal = items.reduce((total, item) => total + (item.rowAmount || 0), 0);
-    const safeDiscount = activeCustomer?.discount || 0; // Replace with dynamic discount passing if tracked inside billing form state
+    const safeDiscount = discount !== undefined ? discount : activeCustomer?.discount || 0; // Replace with dynamic discount passing if tracked inside billing form state
     const netTotalAmount = Math.max(0, subTotal - safeDiscount);
     const paidAmount = paymentType === 'credit' ? 0 : netTotalAmount;
     const balanceAmount = paymentType === 'credit' ? netTotalAmount : 0;
