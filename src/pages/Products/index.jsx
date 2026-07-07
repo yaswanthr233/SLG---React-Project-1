@@ -12,7 +12,7 @@ const Products = () => {
             <div>
             <h1 className="products-title">Products</h1>
                <div className="total-products-container">
-                <BsFillHandbagFill size={45} color="#1B8343" />
+                <BsFillHandbagFill size={35} color="#1B8343" />
                 <div className="total-products-text-container">
                     <span className="total-products-text">Total Products</span>
                     <span className="total-products-count">{productsCount}</span>

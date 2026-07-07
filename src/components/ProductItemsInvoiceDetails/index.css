@@ -1,24 +1,26 @@
 .product-items-invoice-details-container{
-    height: 500px;
-    width: 925px;
+    height: 320px;
+    width: 780px;
     background-color: #ffffff;
     border: 1px solid #E8ECF2;
     border-radius: 15px;
     padding: 10px 20px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 10px;
+    overflow-y: auto;
 }
 
 
+
 .product-items-invoice-details-title{
-    font-size: 24px;
+    font-size: 18px;
     color: #108A43;
     font-weight: 2000;
     font-family: 'Poppins', sans-serif;
 }
 
 .product-items-invoice-details-thead{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
@@ -34,7 +36,7 @@ table{
 }
 
 .product-items-invoice-details-tbody{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     border:1px solid #E8ECF2;
@@ -42,21 +44,21 @@ table{
 }
 
 .product-items-invoice-details-data{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     border:1px solid #E8ECF2;
-    height: 40px;
+    height: 30px;
     text-align: center;
     padding: 5px;
 }
 
 .product-items-invoice-details-add-item-button{
-    width: 200px;
-    height: 40px;
+    width: 100px;
+    height: 30px;
     background-color: #108A43;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
     border: none;
     border-radius: 5px;
@@ -65,7 +67,7 @@ table{
 }
 
 .product-items-invoice-details-select{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
@@ -73,15 +75,15 @@ table{
     border-radius: 5px;
     padding: 5px;
     width: 95%;
-    height: 40px;
+    height: 30px;
     background-color: #ffffff;
 }
 
 .product-items-invoice-details-input-qty,.product-items-invoice-details-input-price{
-    width: 40px;
-    height: 30px;
+    width: 50px;
+    height: 25px;
     border: 1px solid #E8ECF2;
-    font-size: 18px;
+    font-size: 12px;
     border-radius: 5px;
     background-color: #ffffff;
     color: #000000;
@@ -98,8 +100,17 @@ table{
 }
 
 .product-items-invoice-details-cell{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
 }
+
+.product-items-invoice-details-delete-button{
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    width: 30px;
+    outline: none;
+}
+

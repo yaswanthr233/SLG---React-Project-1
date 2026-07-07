@@ -2,28 +2,28 @@
     background-color: #ffffff;
     border: 1px solid #E8ECF2;
     border-radius: 15px;
-    height: 300px;
-    width: 450px;
+    height: 250px;
+    width: 350px;
     padding: 10px 20px;
     box-sizing: border-box;
 }
 
 .customer-details-title{
-    font-size: 24px;
+    font-size: 18px;
     color: #108A43;
     font-weight: 2000;
     font-family: 'Poppins', sans-serif;
 }
 
 .select-customer{
-    font-size: 16px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
 }
 
 .customer-select{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
@@ -31,12 +31,12 @@
     border-radius: 5px;
     padding: 5px;
     width: 98%;
-    height: 40px;
+    height: 30px;
     background-color: #ffffff;
 }
 
 .customer-phone-input,.customer-email-input{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
@@ -44,7 +44,7 @@
     border-radius: 5px;
     padding: 5px;
     width: 95%;
-    height: 30px;
+    height: 20px;
     margin-top: 15px;
     background-color: #ffffff;
 }

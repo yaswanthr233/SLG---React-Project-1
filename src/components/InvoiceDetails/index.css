@@ -2,21 +2,21 @@
     background-color: #ffffff;
     border: 1px solid #E8ECF2;
     border-radius: 15px;
-    height: 300px;
-    width: 450px;
+    height: 250px;
+    width: 400px;
     padding: 10px 20px;
     box-sizing: border-box;
 }
 
 .invoice-details-title{
-    font-size: 24px;
+    font-size: 18px;
     color: #108A43;
     font-weight: 2000;
     font-family: 'Poppins', sans-serif;
 }
 
 .invoice-label{
-    font-size: 20px;
+    font-size: 12px;
     color: #333333;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
@@ -32,7 +32,7 @@
 
 
 .invoice-number-input,.invoice-date-input,.payment-type-input,.due-date-input{
-    font-size: 18px;
+    font-size: 12px;
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
@@ -40,7 +40,7 @@
     border-radius: 5px;
     padding: 5px;
     width: 200px;
-    height: 30px;
+    height: 20px;
     background-color: #ffffff;
 }
 
