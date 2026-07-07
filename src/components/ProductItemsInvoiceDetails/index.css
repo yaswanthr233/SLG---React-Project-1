@@ -1,0 +1,105 @@
+.product-items-invoice-details-container{
+    height: 500px;
+    width: 925px;
+    background-color: #ffffff;
+    border: 1px solid #E8ECF2;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+
+.product-items-invoice-details-title{
+    font-size: 24px;
+    color: #108A43;
+    font-weight: 2000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.product-items-invoice-details-thead{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border:1px solid #E8ECF2;
+    background-color: #F5F5F5;
+    height: 40px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.product-items-invoice-details-tbody{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+    border:1px solid #E8ECF2;
+    
+}
+
+.product-items-invoice-details-data{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+    border:1px solid #E8ECF2;
+    height: 40px;
+    text-align: center;
+    padding: 5px;
+}
+
+.product-items-invoice-details-add-item-button{
+    width: 200px;
+    height: 40px;
+    background-color: #108A43;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+
+}
+
+.product-items-invoice-details-select{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #E8ECF2;
+    border-radius: 5px;
+    padding: 5px;
+    width: 95%;
+    height: 40px;
+    background-color: #ffffff;
+}
+
+.product-items-invoice-details-input-qty,.product-items-invoice-details-input-price{
+    width: 40px;
+    height: 30px;
+    border: 1px solid #E8ECF2;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.product-items-invoice-details-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #E8ECF2;
+    height: 60px;
+    width: 98%;
+}
+
+.product-items-invoice-details-cell{
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}

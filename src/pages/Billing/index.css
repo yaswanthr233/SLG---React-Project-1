@@ -1,0 +1,17 @@
+.billing-container{
+    padding: 20px 40px;
+    height: auto;
+    width: 100%;
+}
+
+.billing-title{
+    font-size: 35px;
+    color: #000000;
+    font-weight: 2000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.customer-invoice-details-container{
+    display: flex;
+    gap: 20px;
+}

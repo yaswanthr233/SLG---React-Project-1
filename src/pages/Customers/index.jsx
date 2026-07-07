@@ -1,10 +1,10 @@
 import './index.css'
 import { HiUsers } from "react-icons/hi2";
-import AddCustomerForm from '../AddCustomerForm/index.jsx';
+import AddCustomerForm from '../../components/AddCustomerForm/index.jsx';
 import { FiSearch } from "react-icons/fi";
-import CustomerDetailsItem from '../CustomerDetailsItem/index.jsx';
+import CustomerDetailsItem from '../../components/CustomerDetailsItem/index.jsx';
 import { useContext } from 'react';
-import CustomersContext from '../context/CustomersContext/index.jsx';
+import CustomersContext from '../../components/context/CustomersContext/index.jsx';
 
 const Customers = () => {
     const { customers, deleteCustomer } = useContext(CustomersContext);

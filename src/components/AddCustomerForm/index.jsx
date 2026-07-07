@@ -2,6 +2,7 @@ import './index.css'
 import CustomerContext from '../context/CustomersContext/index.jsx'
 import React from 'react'
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 const AddCustomerForm = () => {
     const { addCustomer } = React.useContext(CustomerContext)
     const [customerName, setCustomerName] = useState('');
@@ -16,6 +17,7 @@ const AddCustomerForm = () => {
     const onAddCustomer = (e) => {
         e.preventDefault();
         const newCustomer = {
+            id:uuidv4(),
             name: customerName,
             phone: customerPhone,
             email: customerEmail,

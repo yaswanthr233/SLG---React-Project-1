@@ -1,9 +1,9 @@
 import './index.css'
 import { BsFillHandbagFill } from "react-icons/bs";
-import AddProductsForm from '../AddProductsForm/index.jsx';
+import AddProductsForm from '../../components/AddProductsForm/index.jsx';
 import { useState } from 'react';
 import React from 'react';
-import ProductsContext from '../context/ProductsContext/index.jsx';
+import ProductsContext from '../../components/context/ProductsContext/index.jsx';
 
 const Products = () => {
     const {products, deleteProduct,productsCount} = React.useContext(ProductsContext)
