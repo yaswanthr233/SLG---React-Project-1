@@ -13,8 +13,9 @@ const Billing = () => {
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [discount, setDiscount] = useState(0);
     const [items, setItems] = useState([]);
-    const [invoiceNumber, setInvoiceNumber] = useState('');
+    const [invoiceNumber, setInvoiceNumber] = useState("IN-2026-" + Math.floor(Math.random() * 100000));
     const [dueDate, setDueDate] = useState('');
+    const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().split('T')[0]);
 
     useEffect(() => {
         if (customers && customers.length > 0) {
@@ -76,7 +77,6 @@ const Billing = () => {
         if (customers.length > 0) setCustomerId(customers[0].id);
         setPaymentMethod('cash');
         setDiscount(0);
-        setInvoiceNumber('');
         setDueDate('');
     };
 
@@ -136,7 +136,7 @@ const Billing = () => {
                             </div>
                             <div className="invoice-row-field">
                                 <span className="invoice-label">Date:</span>
-                                <input type="date" className="invoice-date-input" defaultChecked />
+                                <input type="date" className="invoice-date-input" value={invoiceDate} onChange={(e) => setInvoiceDate(e.target.value)} />
                             </div>
                             <div className="invoice-row-field">
                                 <span className="invoice-label">Payment Method:</span>
@@ -260,6 +260,7 @@ const Billing = () => {
                     activeCustomer={activeCustomer} 
                     items={computedItemsList} 
                     discount={safeDiscount}
+                    invoiceDate={invoiceDate}
                 />
             </div>
         </div>

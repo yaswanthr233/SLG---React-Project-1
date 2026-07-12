@@ -48,7 +48,7 @@
 }
 
 .logo-name-print {
-    font-size: 15px;
+    font-size: 25px;
     font-weight: bold;
     margin: 0;
     text-align: center;
@@ -79,7 +79,7 @@
 }
 
 .logo-name-print-description {
-    font-size: 9px;
+    font-size: 12px;
     font-weight: normal;
     margin: 0;
     color: #00461d;
@@ -88,7 +88,7 @@
 .invoice-print-template-header-tax-invoice {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     width: 180px;
 }
 
@@ -106,7 +106,6 @@
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     border-radius: 4px;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
@@ -169,15 +168,21 @@
     font-weight: 700;
 }
 
-/* NEW STYLES: Table */
+.invoice-items-summary-tables-container{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
 .invoice-items-table-container {
-    width: 60%;
+    width: 550px;
     border: 1px solid #ccc;
-    margin-bottom: 0px; 
+    margin-bottom: 5px; 
+    display: flex;
 }
 
 .invoice-items-table {
-    width: 100%;
+    flex: 1;
     border-collapse: collapse;
     font-size: 10px;
 }
@@ -210,11 +215,9 @@
 /* NEW STYLES: Summary Section */
 .invoice-summary-section {
     display: flex;
-    width: 100%;
+    width: 750px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-top: none;
-    margin-top: -100px;
 }
 
 .summary-empty-space {
@@ -235,12 +238,11 @@
 
 .summary-table td {
     padding: 5px 8px;
-    border-bottom: 1px solid #eee;
+    border: 1px solid #eee;
+
 }
 
-.summary-table tr:last-child td {
-    border-bottom: none;
-}
+
 
 .summary-highlight-row-green td {
     background-color: #eaf1eb;

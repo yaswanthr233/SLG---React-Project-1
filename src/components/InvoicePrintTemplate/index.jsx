@@ -5,7 +5,7 @@ import { MdCall } from "react-icons/md";
 import { BsCashStack, BsCreditCard } from "react-icons/bs";
 import { MdPhoneIphone } from "react-icons/md";
 
-const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer, items = [] , discount }) => {
+const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCustomer, items = [] , discount , invoiceDate }) => {
     
     const formatPrintDate = (dateString) => {
         if (!dateString) return 'N/A';
@@ -13,7 +13,6 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
         return isNaN(parsedDate.getTime()) ? 'N/A' : parsedDate.toLocaleDateString();
     };
 
-    // 1. Compute totals dynamically from items to perfectly sync with your summary section calculations
     const subTotal = items.reduce((total, item) => total + (item.rowAmount || 0), 0);
     const safeDiscount = discount !== undefined ? discount : activeCustomer?.discount || 0; // Replace with dynamic discount passing if tracked inside billing form state
     const netTotalAmount = Math.max(0, subTotal - safeDiscount);
@@ -32,11 +31,11 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                     <p className="logo-name-print-sub">FERTILIZERS & AGRO CHEMICALS</p>
                     <div className="logo-name-print-description-container-container">
                         <div className="logo-name-print-description-container">
-                            <IoLocationSharp size={12} color="#00461d" />
+                            <IoLocationSharp size={20} color="#00461d" />
                             <p className="logo-name-print-description">Near Hanuman Temple, Dondapadu village, Suryapet dist, Telangana - 508246</p>
                         </div>
                         <div className="logo-name-print-description-container">
-                            <MdCall size={12} color="#00461d" />
+                            <MdCall size={20} color="#00461d" />
                             <p className="logo-name-print-description">9908919593</p>
                         </div>
                     </div>
@@ -53,7 +52,7 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Date</span>
                             <span className="invoice-number-colon-print">:</span>
-                            <span className="invoice-number-value-print">{new Date().toLocaleDateString()}</span>
+                            <span className="invoice-number-value-print">{invoiceDate || new Date().toLocaleDateString()}</span>
                         </div>
                         <div className="invoice-number-container-print">
                             <span className="invoice-number-text-print">Place of Supply</span>
@@ -78,15 +77,12 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                 <h4 className="bill-to-title">BILL TO :</h4>
                 <div className="customer-details-print">
                     <strong className="customer-name">{activeCustomer?.name || 'Walk-in Customer'}</strong>
-                    <span>{activeCustomer?.address1 || 'N/A'}</span>
-                    <span>{activeCustomer?.address2 || ''}</span>
-                    <span>{activeCustomer?.state || ''}</span>
+                    <span>Email: {activeCustomer?.email || 'N/A'}</span>
                     <span>Phone: {activeCustomer?.phone || 'N/A'}</span>
                 </div>
             </div>
-
-            {/* DYNAMIC PRODUCT ITEMS TABLE */}
-            <div className="invoice-items-table-container">
+            <div className="invoice-items-summary-tables-container">
+                <div className="invoice-items-table-container">
                 <table className="invoice-items-table">
                     <thead>
                         <tr>
@@ -119,10 +115,8 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         )}
                     </tbody>
                 </table>
-            </div>
-
-            {/* DYNAMIC SUMMARY SECTION */}
-            <div className="invoice-summary-section">
+                </div>
+                <div className="invoice-summary-section">
                 <div className="summary-empty-space"></div>
                 <div className="summary-calculations">
                     <table className="summary-table">
@@ -150,9 +144,12 @@ const InvoicePrintTemplate = ({ invoiceNumber, paymentType, dueDate, activeCusto
                         </tbody>
                     </table>
                 </div>
+                </div>
             </div>
+            
 
-            {/* FOOTER SECTION */}
+            
+
             <div className="invoice-footer-section">
                 <div className="footer-block payment-options">
                     <p className="footer-title">Payment Options :</p>
