@@ -1,14 +1,13 @@
 import './index.css'
 import { useContext, useState, useEffect } from 'react'
-import CustomersContext from '../../components/context/CustomersContext/index.jsx'
-import ProductsContext from '../../components/context/ProductsContext/index.jsx'
+import CustomersContext from '../../context/CustomersContext/index.jsx'
+import ProductsContext from '../../context/ProductsContext/index.jsx'
 import { MdDeleteOutline } from "react-icons/md"
 import InvoicePrintTemplate from '../../components/InvoicePrintTemplate/index.jsx'
 
 const Billing = () => {
     const { customers } = useContext(CustomersContext);
     const { products } = useContext(ProductsContext);
-    
     const [customerId, setCustomerId] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [discount, setDiscount] = useState(0);
@@ -22,7 +21,14 @@ const Billing = () => {
             setCustomerId(customers[0].id);
         }
     }, [customers]);
-
+    useEffect(() => {
+        if(invoiceDate){
+            const date = new Date(invoiceDate);
+            date.setDate(date.getDate() + 7);
+            const formattedDueDate = date.toISOString().split('T')[0];
+            setDueDate(formattedDueDate);
+        }
+    },[invoiceDate])
     const activeCustomer = customers.find((customer) => String(customer.id) === String(customerId));
 
     const addNewItem = (e) => {
@@ -70,6 +76,7 @@ const Billing = () => {
     const netTotalAmount = Math.max(0, totalAmount - safeDiscount);
     const paidAmount = paymentMethod === 'credit' ? 0 : netTotalAmount;
     const balanceAmount = paymentMethod === 'credit' ? netTotalAmount : 0;
+    
 
     const onClearInvoice = (e) => {
         e.preventDefault();
@@ -86,6 +93,21 @@ const Billing = () => {
             alert("Please fill all the required fields and add at least one product item before printing the invoice.");
         } else {
             window.print();
+        }
+        if(paymentMethod === 'credit'){
+            customers.map((customer) => {
+                    if(customer.id === Number(customerId)){
+                        customer.balance += balanceAmount;
+                        customer.totalPurchase += netTotalAmount;
+                    }
+                });
+        } else {
+            customers.map((customer) => {
+                if(customer.id === Number(customerId)){
+                    customer.totalPurchase += netTotalAmount;
+                }
+            }
+            );
         }
     };
 
@@ -240,7 +262,7 @@ const Billing = () => {
                             id="discount"
                             placeholder="Enter discount"
                             value={discount}
-                            onChange={(e) => setDiscount(e.target.value ? parseFloat(e.target.value) : 0)}
+                            onChange={(e) => setDiscount(e.target.value ? parseFloat(e.target.value) : '')}
                         />
                     </div>
                     <p className="billing-summary-text">Total Amount (₹): <span className='span-billing-total-amount'>{netTotalAmount.toFixed(2)}</span></p>

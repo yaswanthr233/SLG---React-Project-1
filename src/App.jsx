@@ -10,8 +10,8 @@ import Customers from './pages/Customers/index.jsx'
 import { Routes, Route } from 'react-router'
 import { useState,useEffect } from 'react'
 
-import ProductsContext from './components/context/ProductsContext/index.jsx'
-import CustomersContext from './components/context/CustomersContext/index.jsx'
+import ProductsContext from './context/ProductsContext/index.jsx'
+import CustomersContext from './context/CustomersContext/index.jsx'
 import "@fontsource/poppins";
 
 

@@ -54,6 +54,7 @@
     width: 200px;
 }
 
+
 .sidebar-link-item-btn{
     text-decoration: none;
 }
@@ -64,4 +65,14 @@
     font-size: 18px;
     display: block;
     padding: 10px 20px;
+}
+
+.active{
+    background-color: #1B8343;
+    color: #fff;
+    .sidebar-link-text{
+        color: #fff;
+    }
+    outline: none;
+    border: none;
 }

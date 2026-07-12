@@ -3,24 +3,19 @@ import { BsFillHandbagFill } from "react-icons/bs";
 import AddProductsForm from '../../components/AddProductsForm/index.jsx';
 import { useState } from 'react';
 import React from 'react';
-import ProductsContext from '../../components/context/ProductsContext/index.jsx';
+import ProductsContext from '../../context/ProductsContext/index.jsx';
 
 const Products = () => {
     const {products, deleteProduct,productsCount} = React.useContext(ProductsContext)
-    return(
-        <div className="products-container">
-            <div>
-            <h1 className="products-title">Products</h1>
-               <div className="total-products-container">
-                <BsFillHandbagFill size={35} color="#1B8343" />
-                <div className="total-products-text-container">
-                    <span className="total-products-text">Total Products</span>
-                    <span className="total-products-count">{productsCount}</span>
-                </div>
-              </div>
-              <div className="products-list-container">
-                 <ul className="products-list-ul">
-                    {products.map((product) => (
+    const [searchProducts, setSearchProducts] = useState('');
+
+    const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchProducts.toLowerCase())
+    );
+
+    const renderProductsList = () => {
+        return( <ul className="products-list-ul">
+                    {filteredProducts.map((product) => (
                         <li key={product.id} className="products-list-li">
                             <img className="product-image" src={product.imgUrl} alt={product.name} />
                             <div className="product-details-container">
@@ -48,6 +43,32 @@ const Products = () => {
                         </li>
                     ))}
                  </ul>
+        )
+    }
+    const renderNoProductsView = () => {
+        return(
+            <div className="no-products-container">
+                <p>No products found.</p>
+            </div>
+        )
+    }
+
+    return(
+        <div className="products-container">
+            <div>
+            <h1 className="products-title">Products</h1>
+               <div className="total-products-container">
+                <BsFillHandbagFill size={35} color="#1B8343" />
+                <div className="total-products-text-container">
+                    <span className="total-products-text">Total Products</span>
+                    <span className="total-products-count">{productsCount}</span>
+                </div>
+              </div>
+              <input type="text" placeholder="Search Products"  className="product-search-input" onChange={(e) => setSearchProducts(e.target.value)} value={searchProducts} />
+              <div className="products-list-container">
+                {
+                    filteredProducts.length > 0 ? renderProductsList() : renderNoProductsView()
+                }
               </div>
             </div>
             <AddProductsForm />

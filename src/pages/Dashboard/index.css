@@ -1,0 +1,12 @@
+.dashboard-container{
+    width: 98%;
+    background-color: #FBFBFD;
+    padding: 0 20px;
+   
+}
+
+.dashboard-title{
+    font-size: 30px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+}

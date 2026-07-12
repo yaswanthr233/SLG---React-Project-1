@@ -4,7 +4,7 @@ import AddCustomerForm from '../../components/AddCustomerForm/index.jsx';
 import { FiSearch } from "react-icons/fi";
 import CustomerDetailsItem from '../../components/CustomerDetailsItem/index.jsx';
 import { useContext ,useState} from 'react';
-import CustomersContext from '../../components/context/CustomersContext/index.jsx';
+import CustomersContext from '../../context/CustomersContext/index.jsx';
 
 const Customers = () => {
     const { customers, deleteCustomer } = useContext(CustomersContext);
@@ -19,6 +19,35 @@ const Customers = () => {
         customer.name.toLowerCase().includes(searchCustomers.toLowerCase())
     );
 
+    const renderCustomersList = () => {
+        return (
+            <table className="customers-table">
+                        <thead className="customer-item-header">
+                            <tr>
+                                <th className="customer-item-header-attribute">Name</th>
+                                <th className="customer-item-header-attribute">Phone</th>
+                                <th className="customer-item-header-attribute">Total Purchases</th>
+                                <th className="customer-item-header-attribute balance">Balance</th>
+                                <th className="customer-item-header-attribute status">Status</th>
+                                <th className="customer-item-header-attribute">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="customer-item-header-attributes-container">
+                            {filteredCustomers.map((customer) => (
+                                <CustomerDetailsItem key={customer.id} customer={customer} onDeleteCustomer={onDeleteCustomer} />
+                            ))}
+                        </tbody>
+                    </table>
+        )
+    }
+
+    const renderNoCustomersView = () => {
+        return (
+            <div className="no-customers-container">
+                <p>No customers found.</p>
+            </div>
+        )
+    }
     return (
         <div className="customers-container">
             <div className="customers-main-content">
@@ -37,23 +66,7 @@ const Customers = () => {
                             <FiSearch size={22} color="#000000" />
                         </div>
                     </div>
-                    <table className="customers-table">
-                        <thead className="customer-item-header">
-                            <tr>
-                                <th className="customer-item-header-attribute">Name</th>
-                                <th className="customer-item-header-attribute">Phone</th>
-                                <th className="customer-item-header-attribute">Total Purchases</th>
-                                <th className="customer-item-header-attribute balance">Balance</th>
-                                <th className="customer-item-header-attribute status">Status</th>
-                                <th className="customer-item-header-attribute">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="customer-item-header-attributes-container">
-                            {filteredCustomers.map((customer) => (
-                                <CustomerDetailsItem key={customer.id} customer={customer} onDeleteCustomer={onDeleteCustomer} />
-                            ))}
-                        </tbody>
-                    </table>
+                    {filteredCustomers.length === 0 ? renderNoCustomersView() : renderCustomersList()}
                 </div>
             </div>
             <AddCustomerForm />

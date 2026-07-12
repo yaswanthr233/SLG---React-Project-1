@@ -2,7 +2,7 @@ import './index.css'
 import { useState } from 'react';
 import React from 'react';
 import { useContext } from 'react';
-import ProductsContext from '../context/ProductsContext/index.jsx';
+import ProductsContext from '../../context/ProductsContext/index.jsx';
 import {v4 as uuid} from 'uuid';
 const AddProductsForm = () => {
     const {addProduct} = useContext(ProductsContext);
